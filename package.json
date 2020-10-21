@@ -1,0 +1,10 @@
+{
+  "name": "blaseball-latest-eventdata",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "eventsource": "^1.0.7",
+    "express": "^4.17.1"
+  }
+}
