@@ -11,16 +11,27 @@ fights = null
 const evtSource = new EventSource("https://www.blaseball.com/events/streamData");
 
 evtSource.onmessage = function(event) {
-    latest = JSON.parse(event.data);
-    console.log(latest);
-    if (latest.value.games != null)
-        games = latest;
-    if (latest.value.leagues != null)
-        leagues = latest;
-    if (latest.value.temporal != null)
-        temporal = latest;
-    if (latest.value.fights != null)
-        fights = latest;
+    data = JSON.parse(event.data);
+    console.log(data);
+    if (latest == null) {
+        latest = data;
+    }
+    if (data.value.games != null) {
+        games = data.value.games;
+        latest.value.games = data.value.games;
+    }
+    if (data.value.leagues != null) {
+        leagues = data.value.leagues;
+        latest.value.leagues = data.value.leagues;
+    }
+    if (data.value.temporal != null) {
+        temporal = data.value.temporal;
+        latest.value.temporal = data.value.temporal;
+    }
+    if (data.value.fights != null) {
+        fights = data.value.fights;
+        latest.value.fights = data.value.fights;
+    }
 }
 
 app.get("/api/v1/latest/streamData", function(req, res) {
